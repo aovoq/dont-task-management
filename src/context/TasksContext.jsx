@@ -20,7 +20,6 @@ export const TasksProvider = ({ children }) => {
    const { user } = useAuthContext()
    const [tasks, setTasks] = useState([])
    const [loading, setLoading] = useState(true)
-   const col = collection(db, `users/${user.uid}/tasks`)
 
    useEffect(() => {
       if (!user) {
@@ -38,6 +37,7 @@ export const TasksProvider = ({ children }) => {
    }, [user])
 
    const addTask = (taskName) => {
+      const col = collection(db, `users/${user.uid}/tasks`)
       addDoc(col, {
          uid: user.uid,
          taskName: taskName,
