@@ -7,10 +7,11 @@ import { db } from '../lib/firebase'
 import { addDoc, collection } from 'firebase/firestore'
 import { useTasksContext } from '../context/TasksContext'
 import Task from '../components/Task'
+import Header from '../components/Header'
 
 const Home = () => {
-   const { tasks, addTask } = useTasksContext()
    const { user } = useAuthContext()
+   const { tasks, addTask } = useTasksContext()
    const navigate = useNavigate()
    const [task, setTask] = useState('')
 
@@ -27,13 +28,9 @@ const Home = () => {
 
    return (
       <>
+         <Header />
          <main>
             <h1>Home</h1>
-            <div>
-               <img src={user.photoURL} />
-               <p>{user.displayName}</p>
-               <p>{user.email}</p>
-            </div>
             <button onClick={handleLogout}>logout</button>
             <form onSubmit={handleSubmit}>
                <input type='text' value={task} onChange={(e) => setTask(e.target.value)} />
